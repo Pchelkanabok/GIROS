@@ -1,0 +1,137 @@
+MDScreen:
+    MDNavigationLayout:
+        ScreenManager:
+            id: screen_manager
+            MDScreen:
+                id: main_screen
+                name: "main"
+                oriental: 'vertical'
+
+                MDTopAppBar:
+                    id: toolbar
+                    pos_hint: {"top": 1}
+                    #elevation: 10
+                    title: "Main"
+                    left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+                    md_bg_color: .15, .37, .39, 1
+
+                BoxLayout:
+                    orientation: "vertical"
+                    adaptive_size: True
+                    rows: 3
+
+                    FloatLayout:
+                        #orientation: "horizontal"
+                        #rows: 2
+                        spacing: "8dp"
+
+                        MDIconButton:
+                            icon: "qrcode"
+                            #pos_hint: {'x': .1, 'y': .8}
+                            pos_hint: {"right":0.99,"top":0.9}
+                            font_size: "15dp"
+                            on_release: app.qr()   #здесь команда на cторону питона по поиску в БД
+                        MDIconButton:
+                            icon: "cross"
+                            #pos_hint: {'x': .1, 'y': .8}
+                            pos_hint: {"right":0.9,"top":0.9}
+                            font_size: "15dp"
+                            on_release: app.cross()   #здесь команда на cторону питона по поиску в БД
+
+                    FloatLayout:
+                        orientation: "horizontal"
+                        spacing: "8dp"
+
+                        ScrollView:
+                            pos_hint: {'center_x': .5, 'center_y': .2}
+                            size_hint: 0.95, 0.6
+                            do_scroll_x: False
+                            MDList:
+                                ThreeLineListItem:
+                                    id:LineListItem1
+                                    text: "название"
+                                    secondary_text: "граммы"
+                                    tertiary_text: "цена"
+
+
+                    FloatLayout:
+                        orientation: "horizontal"
+                        spacing: "8dp"
+
+                        MDFillRoundFlatButton:
+                            text: "[color=#F8E3C4]Оплатить[/color]"
+                            md_bg_color: .86, .48, .40, 1
+                            font_size: "18sp"
+                            adaptive_size: True
+                            pos_hint: {'center_x': 0.5, 'y':0.2}
+                            size_hint: 0.2, 0.2
+                            #size_hint: None, None
+                            #size: 100, 30
+                            on_release: screen_manager.current = 'pay'     #здесь команда на cторону питона по построению маршрута
+                            #on_pres: app.pay()
+
+            MDScreen:
+                name: "pay"
+                oriental: 'vertical'
+                on_enter: app.pay()
+
+                Image:
+                    id: qr_pay
+                    source: 'for_pay_screen.jpg'
+                    pos_hint: {"right":0.95,"top":0.95}
+
+                MDIconButton:
+                    icon: "home"
+                    #pos_hint: {'x': .1, 'y': .8}
+                    pos_hint: {"right":0.95,"top":0.9}
+                    font_size: "15dp"
+                    #on_press: root.manager.current = 'product list'
+                    on_release: screen_manager.current = 'main'   #здесь команда на cторону питона по поиску в БД
+
+
+
+
+
+            MDScreen:
+                name: "history"
+                oriental: 'vertical'
+                spacing: "10dp"
+
+                MDTopAppBar:
+                    id: toolbar
+                    pos_hint: {"top": 1}
+                    title: "History"
+                    left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+                    md_bg_color: .15, .37, .39, 1
+
+
+
+
+
+
+
+        MDNavigationDrawer:
+            id: nav_drawer
+
+            ContentNavigationDrawer:
+                orientation: 'vertical'
+                padding: "8dp"
+
+                ScrollView:
+
+                    MDList:
+                        OneLineListItem:
+                            text: "Main"
+                            on_press:
+                                nav_drawer.set_state("close")
+                                screen_manager.current = "main"
+
+                        OneLineListItem:
+                            text: "History"
+                            on_press:
+                                nav_drawer.set_state("close")
+                                screen_manager.current = "history"
+
+
+
+
