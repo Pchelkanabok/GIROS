@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/main_screen">
+
+    <fragment
+        android:id="@+id/main_screen"
+        android:name="com.example.ebalovojest.FragmentMain"
+        android:label="main_screen"
+        tools:layout="@layout/fragment_main_screen" >
+        <action
+            android:id="@+id/action_main_screen_to_history_screen"
+            app:destination="@id/history_screen" />
+        <action
+            android:id="@+id/action_main_screen_to_support_screen"
+            app:destination="@id/support_screen" />
+        <action
+            android:id="@+id/action_main_screen_to_login_screen"
+            app:destination="@id/login_screen" />
+        <action
+            android:id="@+id/action_main_screen_to_qrScan_screen"
+            app:destination="@id/qrScan_screen" />
+        <action
+            android:id="@+id/action_main_screen_to_dishinfo_dialog"
+            app:destination="@id/dishinfo_dialog" />
+        <argument
+            android:name="dishInfo_main_class"
+            app:argType="com.example.ebalovojest.DishInfo"
+            android:defaultValue="@null"
+            app:nullable="true"/>
+        <action
+            android:id="@+id/action_main_screen_to_pay_dialog"
+            app:destination="@id/pay_dialog" />
+    </fragment>
+    <fragment
+        android:id="@+id/history_screen"
+        android:name="com.example.ebalovojest.FragmentHistory"
+        android:label="history_screen"
+        tools:layout="@layout/fragment_history_screen" />
+    <fragment
+        android:id="@+id/support_screen"
+        android:name="com.example.ebalovojest.FragmentSupport"
+        android:label="support_screen"
+        tools:layout="@layout/fragment_support_screen" />
+    <fragment
+        android:id="@+id/login_screen"
+        android:name="com.example.ebalovojest.FragmentLogin"
+        android:label="login_screen"
+        tools:layout="@layout/fragment_login_screen" />
+    <fragment
+        android:id="@+id/qrScan_screen"
+        android:name="com.example.ebalovojest.FragmentScanqr"
+        android:label="fragment_qr_scan_screen"
+        tools:layout="@layout/fragment_qr_scan_screen" >
+        <action
+            android:id="@+id/action_qrScan_screen_to_main_screen"
+            app:destination="@id/main_screen" />
+    </fragment>
+    <dialog
+        android:id="@+id/dishinfo_dialog"
+        android:name="com.example.ebalovojest.dishinfo_dialog"
+        android:label="dishinfo_dialog" >
+        <action
+            android:id="@+id/action_dishinfo_dialog_to_main_screen2"
+            app:destination="@id/main_screen" />
+        <argument
+            android:name="info_class"
+            app:argType="com.example.ebalovojest.DishInfoToInfo"
+            android:defaultValue="@null"
+            app:nullable="true"/>
+    </dialog>
+    <dialog
+        android:id="@+id/pay_dialog"
+        android:name="com.example.ebalovojest.qrpay_dialog"
+        android:label="qrpay_dialog" >
+        <argument
+            android:name="qrCreate_class"
+            app:argType="com.example.ebalovojest.qrCreateInfo"
+            android:defaultValue="@null"
+            app:nullable="true"/>
+        <action
+            android:id="@+id/action_pay_dialog_to_main_screen"
+            app:destination="@id/main_screen" />
+    </dialog>
+</navigation>
